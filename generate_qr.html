@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator — BGC SENergy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0f1a;
+            color: #f1f5f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #f472b6, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        input {
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: #f1f5f9;
+            font-size: 0.9rem;
+            width: 400px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #4ade80;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #4ade80, #06b6d4);
+            color: #0a0f1a;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+        }
+        #qrcode {
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        }
+        #qrcode img {
+            display: block;
+        }
+        .instructions {
+            max-width: 600px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+        .instructions h3 {
+            color: #fbbf24;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .instructions code {
+            background: rgba(74, 222, 128, 0.15);
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            color: #4ade80;
+            font-size: 0.75rem;
+        }
+        .instructions ol {
+            padding-left: 1.2rem;
+        }
+        .instructions li {
+            margin-bottom: 0.3rem;
+        }
+        .download-btn {
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #f472b6, #a855f7);
+        }
+        .download-btn:hover {
+            box-shadow: 0 4px 20px rgba(244, 114, 182, 0.3);
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🪷 QR Code — BGC: THE DUAL-BIO SYNERGY</h1>
+    <p class="subtitle">Tạo QR Code cho slide cuối cùng của bài thuyết trình</p>
+    
+    <div class="input-group">
+        <input type="text" id="urlInput" placeholder="Nhập URL trang Thank You (ví dụ: https://your-site.netlify.app)" 
+               value="https://anky06-ky.github.io/SENergy/">
+        <button onclick="generateQR()">Tạo QR Code</button>
+    </div>
+    
+    <div id="qrcode"></div>
+    
+    <button class="download-btn hidden" id="downloadBtn" onclick="downloadQR()">📥 Tải QR Code (PNG)</button>
+
+    <div class="instructions">
+        <h3>📋 Hướng dẫn Deploy trang Thank You lên Netlify (Miễn phí)</h3>
+        <ol>
+            <li>Truy cập <code>https://app.netlify.com</code> và đăng nhập</li>
+            <li>Kéo thả thư mục <code>QR_Code</code> (chứa index.html, style.css, script.js) vào vùng deploy</li>
+            <li>Netlify sẽ tự động deploy và cung cấp URL (ví dụ: <code>https://random-name.netlify.app</code>)</li>
+            <li>Đổi tên site trong Settings → Site details → Change site name thành tên bạn muốn</li>
+            <li>Copy URL, dán vào ô bên trên, và bấm "Tạo QR Code"</li>
+            <li>Tải hình QR Code về, chèn vào slide cuối!</li>
+        </ol>
+        <br>
+        <p style="color: #64748b;">⚠️ <strong>Lưu ý:</strong> File <code>generate_qr.html</code> này chỉ dùng để tạo QR, <strong>KHÔNG</strong> cần deploy file này. Chỉ deploy 3 file: <code>index.html</code>, <code>style.css</code>, <code>script.js</code>.</p>
+    </div>
+
+    <script>
+        let qrGenerated = false;
+
+        function generateQR() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) {
+                alert('Vui lòng nhập URL!');
+                return;
+            }
+
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+
+            new QRCode(qrContainer, {
+                text: url,
+                width: 280,
+                height: 280,
+                colorDark: '#0a0f1a',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('downloadBtn').classList.remove('hidden');
+            qrGenerated = true;
+        }
+
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.download = 'BGC_SENergy_QR_Code.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } else {
+                // fallback for img tag
+                const img = document.querySelector('#qrcode img');
+                if (img) {
+                    const link = document.createElement('a');
+                    link.download = 'BGC_SENergy_QR_Code.png';
+                    link.href = img.src;
+                    link.click();
+                }
+            }
+        }
+
+        // Auto-generate on load
+        window.addEventListener('load', () => {
+            generateQR();
+        });
+    </script>
+</body>
+</html>
