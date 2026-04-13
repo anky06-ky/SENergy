@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGC: THE DUAL-BIO SYNERGY – Cảm ơn quý vị!</title>
+    <meta name="description" content="Lời cảm ơn chân thành từ nhóm SENergy – Dự án BGC: THE DUAL-BIO SYNERGY, Cuộc thi Khởi nghiệp Ra Khơi 2026, Trường Đại học Văn Lang.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Particle canvas for floating elements -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Lotus petals falling animation -->
+    <div id="lotusRain"></div>
+
+    <!-- Water hyacinth floating bubbles -->
+    <div id="bubbles"></div>
+
+    <div class="container" id="mainContainer">
+        <!-- Stage 1: Opening Animation -->
+        <div class="stage stage-1 active" id="stage1">
+            <div class="logo-reveal">
+                <div class="leaf-icon" id="leafIcon">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="55" stroke="url(#grad1)" stroke-width="3" fill="none" class="circle-draw"/>
+                        <defs>
+                            <linearGradient id="grad1" x1="0" y1="0" x2="120" y2="120">
+                                <stop offset="0%" stop-color="#4ade80"/>
+                                <stop offset="50%" stop-color="#06b6d4"/>
+                                <stop offset="100%" stop-color="#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Lotus flower -->
+                        <g class="lotus-svg" transform="translate(60,55)">
+                            <ellipse rx="8" ry="20" fill="#f9a8d4" opacity="0.9" transform="rotate(-30)"/>
+                            <ellipse rx="8" ry="20" fill="#f472b6" opacity="0.8" transform="rotate(0)"/>
+                            <ellipse rx="8" ry="20" fill="#f9a8d4" opacity="0.9" transform="rotate(30)"/>
+                            <ellipse rx="6" ry="15" fill="#fb7185" opacity="0.7" transform="rotate(-60)"/>
+                            <ellipse rx="6" ry="15" fill="#fb7185" opacity="0.7" transform="rotate(60)"/>
+                            <circle r="6" fill="#fbbf24" cy="2"/>
+                        </g>
+                        <!-- Small leaf -->
+                        <path d="M55 85 Q60 70 65 85 Q60 80 55 85Z" fill="#4ade80" opacity="0.8"/>
+                    </svg>
+                </div>
+                <h2 class="project-badge">CUỘC THI KHỞI NGHIỆP RA KHƠI 2026</h2>
+                <h3 class="university-badge">TRƯỜNG ĐẠI HỌC VĂN LANG</h3>
+            </div>
+        </div>
+
+        <!-- Stage 2: Main Thank You -->
+        <div class="stage stage-2" id="stage2">
+            <div class="thank-you-wrapper">
+                <div class="sparkle-container" id="sparkles"></div>
+                
+                <p class="pre-title animate-item">Nhóm <span class="highlight-text">SENergy</span> xin gửi lời</p>
+                
+                <h1 class="main-title animate-item">
+                    <span class="title-line line-1">Cảm Ơn</span>
+                    <span class="title-line line-2">Chân Thành</span>
+                </h1>
+
+                <div class="divider animate-item">
+                    <span class="divider-leaf">🌿</span>
+                    <span class="divider-line"></span>
+                    <span class="divider-lotus">🪷</span>
+                    <span class="divider-line"></span>
+                    <span class="divider-leaf">🌿</span>
+                </div>
+
+                <div class="project-info animate-item">
+                    <p class="project-name">BGC: THE DUAL-BIO SYNERGY</p>
+                    <p class="project-desc">Hệ sinh thái Tuần hoàn tích hợp Dữ liệu<br>và Dược mỹ phẩm từ <span class="text-lotus">Sen</span> & <span class="text-hyacinth">Lục bình</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 3: Team & Message -->
+        <div class="stage stage-3" id="stage3">
+            <div class="message-card animate-item">
+                <div class="quote-icon">"</div>
+                <p class="message-text">
+                    Chúng tôi không chỉ bán sản phẩm,<br>
+                    chúng tôi bán <strong>sự minh bạch</strong> cho tương lai xanh.
+                </p>
+                <div class="quote-icon closing">"</div>
+            </div>
+
+            <div class="team-section animate-item">
+                <h3 class="team-title">Đội ngũ SENergy</h3>
+                <div class="team-grid">
+                    <div class="team-member" style="--delay: 0.1s">
+                        <div class="member-avatar" style="--hue: 280">
+                            <span>NK</span>
+                        </div>
+                        <p class="member-name">Nguyễn Phạm Trọng Khang</p>
+                        <p class="member-role">Trưởng nhóm & Data Architect</p>
+                    </div>
+                    <div class="team-member" style="--delay: 0.2s">
+                        <div class="member-avatar" style="--hue: 330">
+                            <span>HT</span>
+                        </div>
+                        <p class="member-name">Hoàng Phú Thịnh</p>
+                        <p class="member-role">Chiến lược Kinh doanh</p>
+                    </div>
+                    <div class="team-member" style="--delay: 0.3s">
+                        <div class="member-avatar" style="--hue: 200">
+                            <span>ĐL</span>
+                        </div>
+                        <p class="member-name">Đặng Khánh Linh</p>
+                        <p class="member-role">Truyền thông & Branding</p>
+                    </div>
+                    <div class="team-member" style="--delay: 0.4s">
+                        <div class="member-avatar" style="--hue: 150">
+                            <span>TT</span>
+                        </div>
+                        <p class="member-name">Trần Thị Minh Thư</p>
+                        <p class="member-role">R&D & Product Strategy</p>
+                    </div>
+                    <div class="team-member" style="--delay: 0.5s">
+                        <div class="member-avatar" style="--hue: 40">
+                            <span>AK</span>
+                        </div>
+                        <p class="member-name">Trần An Kỳ</p>
+                        <p class="member-role">AI Specialist</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="esg-badges animate-item">
+                <div class="esg-badge env">
+                    <span class="badge-icon">🌱</span>
+                    <span class="badge-label">Environment</span>
+                </div>
+                <div class="esg-badge social">
+                    <span class="badge-icon">🤝</span>
+                    <span class="badge-label">Social</span>
+                </div>
+                <div class="esg-badge gov">
+                    <span class="badge-icon">🛡️</span>
+                    <span class="badge-label">Governance</span>
+                </div>
+            </div>
+
+            <p class="footer-text animate-item">
+                <span class="build-local">Build Local</span> · <span class="sustain-global">Sustain Global</span>
+            </p>
+
+            <p class="copyright animate-item">© 2026 BGC: THE DUAL-BIO SYNERGY — TP. HCM, Việt Nam</p>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
