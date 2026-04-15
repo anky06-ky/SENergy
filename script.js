@@ -384,8 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Re-launch confetti on click/tap (fun interaction!)
         document.addEventListener('click', (e) => {
-            // Only if on stage 3
-            if (stages.stage3.classList.contains('active')) {
+            // Only if on stage 3 and NOT clicking an avatar or inside lightbox
+            const isAvatar = e.target.closest('.member-avatar');
+            const isLightbox = e.target.closest('#memberlightbox');
+            if (stages.stage3.classList.contains('active') && !isAvatar && !isLightbox) {
                 launchConfetti();
                 
                 // Create burst of petals at click position
@@ -394,7 +396,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
+        // === LIGHTBOX ===
+        const lightbox = document.getElementById('memberlightbox');
+        const lbImg   = document.getElementById('lightboxImg');
+        const lbName  = document.getElementById('lightboxName');
+        const lbRole  = document.getElementById('lightboxRole');
+        const lbClose = document.getElementById('lightboxClose');
+
+        function openLightbox(imgSrc, name, role) {
+            lbImg.src = imgSrc;
+            lbImg.alt = name;
+            lbName.textContent = name;
+            lbRole.textContent = role;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Click on avatar → open
+        document.querySelectorAll('.member-avatar[data-img]').forEach(avatar => {
+            avatar.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(
+                    avatar.dataset.img,
+                    avatar.dataset.name,
+                    avatar.dataset.role
+                );
+            });
+        });
+
+        // Click overlay backdrop → close
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Click X button → close
+        lbClose.addEventListener('click', closeLightbox);
+
+        // Escape key → close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
     }
 
     init();
 });
+

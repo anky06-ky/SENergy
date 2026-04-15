@@ -153,35 +153,35 @@
                 <h3 class="team-title">Đội ngũ SENergy</h3>
                 <div class="team-grid">
                     <div class="team-member" style="--delay: 0.1s">
-                        <div class="member-avatar" style="--hue: 280">
+                        <div class="member-avatar" style="--hue: 280" data-img="img/Trong_Khang.jpg" data-name="Nguyễn Phạm Trọng Khang" data-role="Trưởng nhóm & Data Architect">
                             <img src="img/Trong_Khang.jpg" alt="Nguyễn Phạm Trọng Khang">
                         </div>
                         <p class="member-name">Nguyễn Phạm Trọng Khang</p>
                         <p class="member-role">Trưởng nhóm & Data Architect</p>
                     </div>
                     <div class="team-member" style="--delay: 0.2s">
-                        <div class="member-avatar" style="--hue: 330">
+                        <div class="member-avatar" style="--hue: 330" data-img="img/Anh_Thinh.jpg" data-name="Hoàng Phú Thịnh" data-role="Chiến lược Kinh doanh">
                             <img src="img/Anh_Thinh.jpg" alt="Hoàng Phú Thịnh">
                         </div>
                         <p class="member-name">Hoàng Phú Thịnh</p>
                         <p class="member-role">Chiến lược Kinh doanh</p>
                     </div>
                     <div class="team-member" style="--delay: 0.3s">
-                        <div class="member-avatar" style="--hue: 200">
+                        <div class="member-avatar" style="--hue: 200" data-img="img/Chi_Linh.jpg" data-name="Đặng Khánh Linh" data-role="Truyền thông & Branding">
                             <img src="img/Chi_Linh.jpg" alt="Đặng Khánh Linh">
                         </div>
                         <p class="member-name">Đặng Khánh Linh</p>
                         <p class="member-role">Truyền thông & Branding</p>
                     </div>
                     <div class="team-member" style="--delay: 0.4s">
-                        <div class="member-avatar" style="--hue: 150">
+                        <div class="member-avatar" style="--hue: 150" data-img="img/Chi_Thu.jpg" data-name="Trần Thị Minh Thư" data-role="R&D & Product Strategy">
                             <img src="img/Chi_Thu.jpg" alt="Trần Thị Minh Thư">
                         </div>
                         <p class="member-name">Trần Thị Minh Thư</p>
                         <p class="member-role">R&D & Product Strategy</p>
                     </div>
                     <div class="team-member" style="--delay: 0.5s">
-                        <div class="member-avatar" style="--hue: 40">
+                        <div class="member-avatar" style="--hue: 40" data-img="img/An_Ky.jpg" data-name="Trần An Kỳ" data-role="AI Specialist">
                             <img src="img/An_Ky.jpg" alt="Trần An Kỳ">
                         </div>
                         <p class="member-name">Trần An Kỳ</p>
@@ -215,6 +215,20 @@
 
     <!-- Confetti Canvas -->
     <canvas id="confettiCanvas"></canvas>
+
+    <!-- Lightbox Modal -->
+    <div id="memberlightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Ảnh thành viên">
+        <div class="lightbox-card">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Đóng">✕</button>
+            <div class="lightbox-img-wrap">
+                <img id="lightboxImg" src="" alt="">
+            </div>
+            <div class="lightbox-info">
+                <p class="lightbox-name" id="lightboxName"></p>
+                <p class="lightbox-role" id="lightboxRole"></p>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
