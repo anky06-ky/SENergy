@@ -226,8 +226,8 @@ body::before {
 }
 
 .leaf-icon {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     animation: logoFloat 3s ease-in-out infinite;
 }
 
@@ -237,8 +237,8 @@ body::before {
 }
 
 .circle-draw {
-    stroke-dasharray: 346;
-    stroke-dashoffset: 346;
+    stroke-dasharray: 578;
+    stroke-dashoffset: 578;
     animation: circleDraw 2s var(--transition-smooth) forwards;
 }
 
@@ -255,17 +255,37 @@ body::before {
 
 .lotus-svg {
     opacity: 0;
-    animation: lotusBloom 1s ease-out 1s forwards;
+    animation: lotusBloom 1.2s ease-out 1s forwards;
 }
 
 @keyframes lotusBloom {
     0% {
         opacity: 0;
-        transform: translate(60px, 55px) scale(0);
+        transform: translate(100px, 95px) scale(0);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(100px, 95px) scale(1.1);
     }
     100% {
         opacity: 1;
-        transform: translate(60px, 55px) scale(1);
+        transform: translate(100px, 95px) scale(1);
+    }
+}
+
+.lotus-leaves {
+    opacity: 0;
+    animation: leavesAppear 0.8s ease-out 1.8s forwards;
+}
+
+@keyframes leavesAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -567,8 +587,8 @@ body::before {
 }
 
 .member-avatar {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: linear-gradient(
         135deg, 
@@ -578,14 +598,20 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: white;
+    padding: 3px;
     box-shadow: 
         0 4px 15px hsla(var(--hue, 200), 70%, 50%, 0.3),
         inset 0 1px 2px rgba(255, 255, 255, 0.2);
     transition: transform 0.3s var(--transition-bounce),
                 box-shadow 0.3s ease;
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
 }
 
 .team-member:hover .member-avatar {

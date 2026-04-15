@@ -330,7 +330,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startStageSequence() {
-        // Stage 1 is already active
+        // Trigger Stage 1 entry animation: remove then re-add active
+        // so the CSS transition actually fires
+        const s1 = stages.stage1;
+        s1.style.display = 'flex';
+        s1.style.opacity = '0';
+        s1.style.transform = 'translateY(30px)';
+        // Force reflow then fade in
+        s1.offsetHeight;
+        requestAnimationFrame(() => {
+            s1.style.transition = 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)';
+            s1.style.opacity = '1';
+            s1.style.transform = 'translateY(0)';
+        });
+
         setTimeout(() => {
             transitionStage('stage1', 'stage2', () => {
                 initSparkles();
